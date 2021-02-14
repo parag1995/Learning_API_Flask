@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,7 +9,7 @@ from resources.store import Store,StoresList
 
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  #to mention data.db file to SQL alchemy
+app.config['SQLALCHEMY_DATABASE_URI'] =os.environ.get('DATABASE_URL','sqlite:///data.db')  #to mention data.db file to SQL alchemy, DATABASE_URL is gv value in hroku for postgress db and for same purpose we use import os
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'jose'
 api = Api(app)
